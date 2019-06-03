@@ -1,3 +1,10 @@
+---
+title:EM算法
+categories: ML
+tags: [EM算法]
+date: 2018-12-27
+---
+
 # EM算法
 
 - EM 算法是不断的求解**下界极大化逼近求解对数似然极大化**的方法。
@@ -36,7 +43,7 @@
 
   - E步： 在当前 $\theta^{(i)}$ 的情况下，<font color=#CD00CD>计算 $Q(\theta, \theta^{(i)})$</font> ， 因为计算 $Q$ 函数就是在求期望，所以称为 $E$ 步。
 
-    $$\begin{align} Q(\theta, \theta^{(i)}) &= E_z [\log P(Y,Z| \theta)| Y, \theta^{(i)}] \\ &=\sum_{z} \log P(Y,Z|\theta) P(Z|Y,\theta^{(i)}) \end{align}​$$ 
+    $$\begin{align} Q(\theta, \theta^{(i)}) &= E_z [\log P(Y,Z| \theta)| Y, \theta^{(i)}] \\ &=\sum_{z} \log P(Y,Z|\theta) P(Z|Y,\theta^{(i)}) \end{align}$$ 
 
   - M步：求使 $Q$ 函数<font color=#CD00CD>最大的 $\theta$</font> 。 
 
@@ -54,7 +61,7 @@
 
 - **函隐变量的概率模型无法直接求解最大对数似然**：对一个含有隐变量的概率模型，目标是极大化观测数据（不完全数据）$Y$ 关于参数 $\theta$ 的对数似然函数，即：
 
-  $$L(\theta) = \log P(Y|\theta) = \log \sum_z P(Y,Z | \theta) = \log ( \sum_z P(Y|Z, \theta) P(Z|\theta))​$$
+  $$L(\theta) = \log P(Y|\theta) = \log \sum_z P(Y,Z | \theta) = \log ( \sum_z P(Y|Z, \theta) P(Z|\theta))$$
 
   <font color=red>要极大化 $L(\theta)$ 需要对 未知的隐变量 $Z$ 进行求和或者求积分，无法求解。</font>
 

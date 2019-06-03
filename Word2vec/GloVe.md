@@ -1,3 +1,10 @@
+---
+title:GloVe
+categories: ML
+tags: [GloVe]
+date: 2018-12-26
+---
+
 # GloVe 的计算方法
 
 - 构造共线矩阵

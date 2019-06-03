@@ -1,3 +1,10 @@
+---
+title: 提升方法 
+categories: ML
+tags: [AdaBoost, GBDT, 提升树, 前向分布算法]
+date: 2019-01-05
+---
+
 # 提升方法 
 
 #### 强可学习与弱可学习

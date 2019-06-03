@@ -1,3 +1,10 @@
+---
+title:SVM简要整理
+categories: ML
+tags: [SVM，SMO算法]
+date: 2018-12-25
+---
+
 ### SVM简要整理
 
 #### 线性支持向量机

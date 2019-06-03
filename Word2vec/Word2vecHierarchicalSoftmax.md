@@ -1,4 +1,12 @@
+---
+title: Word2vec 优化方法之 Hierarchical Softmax
+categories: ML
+tags: [Hierarchical Softmax， Word2vec, 层次Softmax]
+date: 2018-12-26
+---
+
 # Hierarchical Softmax
+
 > [来源](https://www.cnblogs.com/pinard/p/7243513.html)
 ### 1. 为什么要采用层次Softmax?
 - 普通的 word2vec 可以写成 $\text{Softmax}( x_{n} \times  W_{n \times m} \times W_{m \times n} )$ 。 
@@ -67,7 +75,7 @@
 
   - **求和：** $ \frac{1}{2c} \sum\limits_{i=1}^{2c} x_i $。 CBOW 需要将上下文的词向量通过加和转化为一个词向量。
   - **e=0:** 用于对每个结点的梯度进行加和，因此对 $x_w$ 进行更新的时候用到了这个。 
-  - 对 $j=2,3...,l_w​$ 分别计算对应结点参数的梯度
+  - 对 $j=2,3...,l_w$ 分别计算对应结点参数的梯度
     $$
     \begin{align}
     f &= \sigma(x_w^T \theta_{j-1}^w) \\
