@@ -27,8 +27,9 @@ y_i &= \mathcal{G} (\mathbf{C}, y_1, y_2, ..., y_{i-1})
 $$
 
 ## 1.2 Attention 模型
-<img src=AttentionMechanismInDeepLearning/encoder_decoder_attention.png width=500/>
+<i
 
+mg src=AttentionMechanismInDeepLearning/encoder_decoder_attention.png width=500/>
 $$
 \begin{align}
 y_i &= \mathcal{G} (\mathbf{C_i} , y_1, y_2, ..., y_{i-1}) \\
@@ -57,7 +58,7 @@ $$
 - 第一阶段： 根据 Query 和某个 $Key_i$， 计算两者的相似性或者相关性。 
   - 点积： $Similarity(Query, Key_i)= Query \cdot Key_i$
   - Cosine 相似性： $Similarity(Query, Key_i) = \frac{Query \cdot Key_i}{||Query|| \cdot ||Key_i||}$
-  - MLP 网络： $Similarity(Query, Key_i)=MLP(Query, Key_i)​$
+  - MLP 网络： $Similarity(Query, Key_i)=MLP(Query, Key_i)$
 - 第二阶段：对第一个阶段产生的分值，利用类似 SoftMax 的计算方法进行归一化， 同时能够突出重要元素的权重。
 $$
 a_i = Softmax(Sim_i) = \frac{e^{Sim_i}}{\sum_{j=1}^{L_x} e^{Sim_j}}
