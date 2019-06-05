@@ -14,6 +14,7 @@ date: 2019-03-14
 
 <center>图1.  抽象的文本处理领域的 Encoder-Decoder 框架</center>
 <img src=AttentionMechanismInDeepLearning/rnn_encoder_decoder.png width=500 />
+
 <center> 图2. RNN作为具体模型的Encoder-Decoder框架</center>
 
 
@@ -27,9 +28,7 @@ y_i &= \mathcal{G} (\mathbf{C}, y_1, y_2, ..., y_{i-1})
 $$
 
 ## 1.2 Attention 模型
-<i
-
-mg src=AttentionMechanismInDeepLearning/encoder_decoder_attention.png width=500/>
+<img src=AttentionMechanismInDeepLearning/encoder_decoder_attention.png width=500/>
 $$
 \begin{align}
 y_i &= \mathcal{G} (\mathbf{C_i} , y_1, y_2, ..., y_{i-1}) \\
@@ -75,3 +74,4 @@ $$
 	- Self-Attention可以理解成 Source 和 Target 内容是一样的情况下的注意力机制。
 	- Self-Attention可以捕获同一个句子中单词之间的一些句法特征或者语义特征。
 	- Self-Attention能够更加容易捕获句子中长距离的相互依赖的特征。
+
