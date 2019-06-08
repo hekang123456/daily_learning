@@ -7,6 +7,8 @@ date: 2019-01-05
 
 # 提升方法 
 
+<img src="/boosting/process.png" />
+
 #### 介绍
 
 - 强可学习与弱可学习
@@ -228,7 +230,50 @@ date: 2019-01-05
 
   
 
-  #### XGBoost
+#### XGBoost
+
+ 	XGBoost 是陈天奇等人开发的一个开源机器学习项目， 高效的实现了 GBDT 算法，并进行了算法和工程上的许多改进。 
+
+- GBDT 算法基于经验损失函数的负梯度来构造新的决策树， 只是在决策树构造完成后再进行剪枝。 而 XGBoost 在决策树构建阶段就加入正则化项。
+  $$
+  L_t = \sum\limits_i L(y_i, F_{t-1}(x_i) + f_t(x_i)) + \Omega (f_t) \\
+  \Omega (f_t) = \gamma T + \frac{1}{2} \sum\limits_{j=1}^T w_j^2
+  $$
+  其中 $F_{t-1}(x_i)$ 表示现有的 $t-1$ 棵树的最优解，$T$ 为第$t$ 棵树的叶子节点的数量。 $w_j$ 表示第 $j$ 个节点的预测值。 对该损失函数在 $F_{t-1}$ 处进行二阶泰勒展开可以推导出：
+  $$
+  L_t \approx \hat{L_t} = \sum\limits_{j=1}^T \left[ G_jw_j + \frac{1}{2} (H_j + \lambda)w_j^2 \right] + \gamma T
+  $$
+  其中 $G_j = \sum\limits_{i \in  I_j  } \bigtriangledown _{F_{t-1}} l(y_i, F_{t-1}(x_i)) $ ,  $H_j =  \sum\limits_{i \in  I_j  } \bigtriangledown _{F_{t-1}}^2 l(y_i, F_{t-1}(x_i))$ 
+
+  通过令损失函数相对于  $w_j$ 的导数为 0可以求出在最小化损失函数的情况下各个叶子节点上的预测值。
+  $$
+  w_j ^* = -\frac{G_j}{H_j + \lambda}
+  $$
+  我们可以将预测值带入损失函数中可求得损失函数的最小值是：
+  $$
+  \hat{L_t^*} = -\frac{1}{2} \sum\limits_{j=1}^T \frac{ G_j^2 }{H_j + \lambda} + \gamma T \\
+  $$
+  容易计算出分裂前后损失函数的差值为：
+  $$
+  Gain = \frac{G_L^2 }{H_L + \lambda} + \frac{G_R^2}{H_R + \lambda} - \frac{(G_L + G_R)^2}{H_L + H_R + \lambda} - \gamma
+  $$
+  XGBoost 采用这个差值作为准则进行决策树的构造（和CART, C4.5， ID3是一样的，只是换称了这个指标）。
 
   
+
+- XGBoost 和 GBDT 的区别和联系
+
+  - GBDT 是机器学习算法， XGBoost 是该算法的工程实现。
+  - 在使用 CART  树作为基分类器时， XGBoost 显式的加入了正则化项，上面已经说明了，相当于从新定义了一个构造树的指标。 能够控制模型的复杂度，有利于防止过拟合，从而提高模型的泛化能力。
+  - GBDT 只使用了代价函数的一阶导数信息，XGBoost 使用了二阶导数的信息。
+  - GBDT 采用CART 作为基分类器， XGBoost 采用多种基分类器包括了 线性分类器。
+  - XGBoost 支持子采样。
+  - XGBoost 对数据的缺失值能够进行处理。
+
+- XGBoost 的并行能力
+
+  - 在特征排序上进行了处理，采用了 block 的结构 （<font color=red>**具体怎么做的？**</font>）
+
+  - 计算各个特征的增益是可以进行并行的。
+  - **<font color=purple>近似直方图算法？</font>**
 
